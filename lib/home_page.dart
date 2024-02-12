@@ -8,7 +8,7 @@ class HomePage extends StatelessWidget {
       body: Center(
         child: SizedBox(
           width: 108,
-          child: BadgeWidget(),
+          child: BadgeWidget(badgeText: "요약"),
         ),
       ),
     );
