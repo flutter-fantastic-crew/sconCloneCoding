@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sang/widget/badge2_widget.dart';
 import 'package:sang/widget/badge_widget.dart';
 
 class HomePage extends StatelessWidget {
@@ -8,7 +9,7 @@ class HomePage extends StatelessWidget {
       body: Center(
         child: SizedBox(
           width: 108,
-          child: BadgeWidget(badgeText: "요약"),
+          child: BadgeWidget2(badgeText: "요약"),
         ),
       ),
     );
