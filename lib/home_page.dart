@@ -11,10 +11,17 @@ class HomePage extends StatelessWidget {
       body: Center(
         child: ChangeNotifierProvider<HomePageViewModel>(
           create: (_) => HomePageViewModel(),
-          child: SizedBox(
-            width: 108,
-            child: Text(""),
-          ),
+          child: Consumer<HomePageViewModel>(
+              builder: (context, homePageViewModel, child) {
+            return Column(
+              children: homePageViewModel.plans
+                  .map(
+                    (plan) => Text(
+                        "${plan.planName} ::: totalExpenses: ${plan.totalExpenses}"),
+                  )
+                  .toList(),
+            );
+          }),
         ),
       ),
     );

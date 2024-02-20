@@ -7,7 +7,7 @@ class PlanDataEntity {
   DateTime planEndDate; // 플랜 종료일
   String planMemo; // 플랜 설명 (메모)
   String planName; // 플랜 이름
-  Icon planIcon; // 플랜 아이콘
+  String planIcon; // 플랜 아이콘
   List<PlanHistoryEntity> planHistory; // 플랜예산 기록 리스트
   int totalPlan; // 총금액
 
