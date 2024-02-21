@@ -5,6 +5,7 @@ import 'badge_widget.dart';
 class AppbarWidget extends AppBar {
   AppbarWidget()
       : super(
+          backgroundColor: Color(0xFFF3F3F3),
           title: Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
             const SizedBox(
               width: 10,
