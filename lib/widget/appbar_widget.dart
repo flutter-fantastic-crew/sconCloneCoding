@@ -128,7 +128,16 @@ class AppbarWidget extends AppBar {
                                 color: const Color(0xFFF6F6F6),
                                 borderRadius: BorderRadius.circular(12),
                               ),
-                            )
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            const Text(
+                              "플랜별 소비",
+                              style: TextStyle(
+                                color: Color(0xFFB4B4B4),
+                              ),
+                            ),
                           ],
                         ),
                       ),
