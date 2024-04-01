@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:sang/widget/history_card_widget.dart';
 import 'package:sang/widget/title_card_widget.dart';
 
+import '../entity/plan_data_entity.dart';
+import '../entity/plan_history_entity.dart';
 import 'badge_widget.dart';
 
 class AppbarWidget extends AppBar {
@@ -138,6 +141,44 @@ class AppbarWidget extends AppBar {
                                 color: Color(0xFFB4B4B4),
                               ),
                             ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            Expanded(
+                              child: ListView.builder(
+                                shrinkWrap: true,
+                                itemCount: 50,
+                                itemBuilder: (context, index) {
+                                  return Container(
+                                    padding: const EdgeInsets.only(bottom: 20),
+                                    child: HistoryCardWidget(
+                                      planDataEntity: PlanDataEntity(
+                                          planId: 0,
+                                          planStartDate: DateTime.now(),
+                                          planEndDate: DateTime.now(),
+                                          planMemo: "메모1메모1",
+                                          planName: "계획1이름1",
+                                          planIcon: "아이콘",
+                                          planHistory: [
+                                            PlanHistoryEntity(
+                                              planHistoryId: 0,
+                                              memo: "메모메모",
+                                              createAt: DateTime.now(),
+                                              expenses: 3300,
+                                            ),
+                                            PlanHistoryEntity(
+                                              planHistoryId: 1,
+                                              memo: "메모메모1",
+                                              createAt: DateTime.now(),
+                                              expenses: 200,
+                                            )
+                                          ],
+                                          totalPlan: 1000),
+                                    ),
+                                  );
+                                },
+                              ),
+                            )
                           ],
                         ),
                       ),
