@@ -21,8 +21,31 @@ class PlanDataEntity {
       required this.planHistory,
       required this.totalPlan});
 
-  int get totalExpenses =>
-      planHistory.map((e) => e.expenses).reduce((sum, value) => sum + value);
+  int getTotalExpenses() {
+    Iterable<PlanHistoryEntity> planHistories =
+        planHistory.where((element) => element.planType == PlanType.expenses);
 
-  int get remainExpenses => totalPlan - totalExpenses;
+    if (planHistories.isEmpty) {
+      return 0;
+    }
+
+    return planHistories
+        .map((e) => e.price)
+        .reduce((sum, value) => sum + value);
+  }
+
+  int getTotalIncome() {
+    Iterable<PlanHistoryEntity> planHistories =
+        planHistory.where((element) => element.planType == PlanType.income);
+
+    if (planHistories.isEmpty) {
+      return 0;
+    }
+
+    return planHistories
+        .map((e) => e.price)
+        .reduce((sum, value) => sum + value);
+  }
+
+  int get remainExpenses => totalPlan - getTotalExpenses();
 }

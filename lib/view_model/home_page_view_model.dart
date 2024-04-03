@@ -18,13 +18,15 @@ class HomePageViewModel with ChangeNotifier {
             planHistoryId: 0,
             memo: "메모메모",
             createAt: DateTime.now(),
-            expenses: 100,
+            price: 100,
+            planType: PlanType.income,
           ),
           PlanHistoryEntity(
             planHistoryId: 1,
             memo: "메모메모1",
             createAt: DateTime.now(),
-            expenses: 200,
+            price: 200,
+            planType: PlanType.income,
           )
         ],
         totalPlan: 1000),
@@ -37,17 +39,17 @@ class HomePageViewModel with ChangeNotifier {
         planIcon: "아이콘",
         planHistory: [
           PlanHistoryEntity(
-            planHistoryId: 0,
-            memo: "메모메모",
-            createAt: DateTime.now(),
-            expenses: 100,
-          ),
+              planHistoryId: 0,
+              memo: "메모메모",
+              createAt: DateTime.now(),
+              price: 100,
+              planType: PlanType.expenses),
           PlanHistoryEntity(
-            planHistoryId: 1,
-            memo: "메모메모1",
-            createAt: DateTime.now(),
-            expenses: 500,
-          )
+              planHistoryId: 1,
+              memo: "메모메모1",
+              createAt: DateTime.now(),
+              price: 500,
+              planType: PlanType.income)
         ],
         totalPlan: 1000)
   ];
@@ -57,15 +59,16 @@ class HomePageViewModel with ChangeNotifier {
   int get currentPage => _currentPage;
 
   // 총 소비
-  int get totalPlanExpenses =>
-      plans.map((e) => e.totalExpenses).reduce((sum, value) => sum + value);
+  int get totalPlanExpenses => plans
+      .map((e) => e.getTotalExpenses())
+      .reduce((sum, value) => sum + value);
 
   // 총 수입
-  int get totalPlanIncome => 0;
+  int get totalPlanIncome =>
+      plans.map((e) => e.getTotalIncome()).reduce((sum, value) => sum + value);
 
   // 남은 총 예산
-  int get remainTotalBudget =>
-      totalBudget + totalPlanIncome - totalPlanExpenses;
+  int get remainTotalBudget => totalBudget - totalPlanExpenses;
 
   // 총 예산
   int get totalBudget =>
