@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:sang/view_model/home_page_view_model.dart';
 import 'package:sang/widget/history_card_widget.dart';
 import 'package:sang/widget/title_card_widget.dart';
 
@@ -36,7 +38,7 @@ class AppbarWidget extends AppBar {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20.0),
                   ),
-                  builder: (BuildContext context) {
+                  builder: (_) {
                     return FractionallySizedBox(
                       heightFactor: 0.9,
                       child: Container(
@@ -48,138 +50,111 @@ class AppbarWidget extends AppBar {
                             topRight: Radius.circular(20),
                           ),
                         ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Padding(
-                              padding: EdgeInsets.only(
-                                  top: 30, left: 10, bottom: 25),
-                              child: Text("요약",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 20,
-                                  )),
-                            ),
-                            Row(
-                              children: [
-                                Expanded(
-                                  flex: 1,
-                                  child: TitleCardWidget(
-                                    title: "총 소비",
-                                    desc: "0원",
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 20,
-                                ),
-                                Expanded(
-                                  flex: 1,
-                                  child: TitleCardWidget(
-                                    title: "총 소비",
-                                    desc: "0원",
-                                    descColor: Color(0xFF128F65),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            Container(
-                              height: 75,
-                              child: Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 12, top: 15, bottom: 15, right: 12),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          "남은 총 예산",
-                                          style: TextStyle(
-                                            fontSize: 18,
-                                            color: Color(0xFFB4B4B4),
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          width: 10,
-                                        ),
-                                        Text(
-                                          "100원",
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 18,
-                                          ),
-                                        ),
-                                      ],
+                        child: SingleChildScrollView(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Padding(
+                                padding: EdgeInsets.only(
+                                    top: 30, left: 10, bottom: 25),
+                                child: Text("요약",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20,
+                                    )),
+                              ),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    flex: 1,
+                                    child: TitleCardWidget(
+                                      title: "총 소비",
+                                      desc:
+                                          "${context.read<HomePageViewModel>().totalPlanExpenses}원",
                                     ),
-                                    Text(
-                                      "/ 100원",
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                        color: Color(0xFFB4B4B4),
-                                      ),
+                                  ),
+                                  const SizedBox(
+                                    width: 20,
+                                  ),
+                                  Expanded(
+                                    flex: 1,
+                                    child: TitleCardWidget(
+                                      title: "총 수입",
+                                      desc:
+                                          "${context.read<HomePageViewModel>().totalPlanIncome}원",
+                                      descColor: Color(0xFF128F65),
                                     ),
-                                  ],
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              Container(
+                                height: 75,
+                                decoration: BoxDecoration(
+                                  color: const Color(0xFFF6F6F6),
+                                  borderRadius: BorderRadius.circular(12),
                                 ),
-                              ),
-                              decoration: BoxDecoration(
-                                color: const Color(0xFFF6F6F6),
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            const Text(
-                              "플랜별 소비",
-                              style: TextStyle(
-                                color: Color(0xFFB4B4B4),
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            Expanded(
-                              child: ListView.builder(
-                                shrinkWrap: true,
-                                itemCount: 50,
-                                itemBuilder: (context, index) {
-                                  return Container(
-                                    padding: const EdgeInsets.only(bottom: 20),
-                                    child: HistoryCardWidget(
-                                      planDataEntity: PlanDataEntity(
-                                          planId: 0,
-                                          planStartDate: DateTime.now(),
-                                          planEndDate: DateTime.now(),
-                                          planMemo: "메모1메모1",
-                                          planName: "계획1이름1",
-                                          planIcon: "아이콘",
-                                          planHistory: [
-                                            PlanHistoryEntity(
-                                              planHistoryId: 0,
-                                              memo: "메모메모",
-                                              createAt: DateTime.now(),
-                                              expenses: 3300,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 12, top: 15, bottom: 15, right: 12),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          const Text(
+                                            "남은 총 예산",
+                                            style: TextStyle(
+                                              fontSize: 18,
+                                              color: Color(0xFFB4B4B4),
                                             ),
-                                            PlanHistoryEntity(
-                                              planHistoryId: 1,
-                                              memo: "메모메모1",
-                                              createAt: DateTime.now(),
-                                              expenses: 200,
-                                            )
-                                          ],
-                                          totalPlan: 1000),
-                                    ),
-                                  );
-                                },
+                                          ),
+                                          const SizedBox(
+                                            width: 10,
+                                          ),
+                                          Text(
+                                            "${context.read<HomePageViewModel>().remainTotalBudget}원",
+                                            style: const TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 18,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Text(
+                                        "/ ${context.read<HomePageViewModel>().totalBudget}원",
+                                        style: const TextStyle(
+                                          fontSize: 18,
+                                          color: Color(0xFFB4B4B4),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
                               ),
-                            )
-                          ],
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              const Text(
+                                "플랜별 소비",
+                                style: TextStyle(
+                                  color: Color(0xFFB4B4B4),
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              ...context.read<HomePageViewModel>().plans.map(
+                                    (planData) => HistoryCardWidget(
+                                        planDataEntity: planData),
+                                  )
+                            ],
+                          ),
                         ),
                       ),
                     );

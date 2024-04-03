@@ -46,7 +46,7 @@ class HomePageViewModel with ChangeNotifier {
             planHistoryId: 1,
             memo: "메모메모1",
             createAt: DateTime.now(),
-            expenses: 200,
+            expenses: 500,
           )
         ],
         totalPlan: 1000)
@@ -55,6 +55,21 @@ class HomePageViewModel with ChangeNotifier {
 
   int _currentPage = 0;
   int get currentPage => _currentPage;
+
+  // 총 소비
+  int get totalPlanExpenses =>
+      plans.map((e) => e.totalExpenses).reduce((sum, value) => sum + value);
+
+  // 총 수입
+  int get totalPlanIncome => 0;
+
+  // 남은 총 예산
+  int get remainTotalBudget =>
+      totalBudget + totalPlanIncome - totalPlanExpenses;
+
+  // 총 예산
+  int get totalBudget =>
+      plans.map((e) => e.totalPlan).reduce((sum, element) => sum + element);
 
   void changePage(int currentPage) {
     _currentPage = currentPage;
