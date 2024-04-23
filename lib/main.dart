@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:sang/home_page.dart';
+import 'package:sang/router/router.dart';
 
 void main() {
   runApp(
-    MaterialApp(
-      home: HomePage(),
+    MaterialApp.router(
+      routerConfig: router,
     ),
   );
 }
