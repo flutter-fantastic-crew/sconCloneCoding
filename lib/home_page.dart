@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:sang/view_model/home_page_view_model.dart';
 import 'package:sang/widget/appbar_widget.dart';
@@ -79,33 +80,8 @@ class HomePage extends StatelessWidget {
                                                 fontSize: 19,
                                                 fontWeight: FontWeight.bold)),
                                         onPressed: () {
-                                          homePageViewModel
-                                              .addPlan(PlanDataEntity(
-                                                  planId: 0,
-                                                  planStartDate: DateTime.now(),
-                                                  planEndDate: DateTime.now(),
-                                                  planMemo: "메모2메모2",
-                                                  planName: "계획2이름2",
-                                                  planIcon: "아이콘",
-                                                  planHistory: [
-                                                    PlanHistoryEntity(
-                                                        planHistoryId: 0,
-                                                        memo: "메모메모",
-                                                        createAt:
-                                                            DateTime.now(),
-                                                        price: 100,
-                                                        planType:
-                                                            PlanType.expenses),
-                                                    PlanHistoryEntity(
-                                                        planHistoryId: 1,
-                                                        memo: "메모메모1",
-                                                        createAt:
-                                                            DateTime.now(),
-                                                        price: 500,
-                                                        planType:
-                                                            PlanType.income)
-                                                  ],
-                                                  totalPlan: 1000));
+                                          context
+                                              .push("/home/add_history_page");
                                         },
                                         child: const Text(
                                           "내역 추가",

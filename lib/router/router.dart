@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
+import 'package:sang/add_history_page.dart';
 import 'package:sang/home_page.dart';
 
 final GoRouter router = GoRouter(
@@ -13,6 +15,14 @@ final GoRouter router = GoRouter(
       pageBuilder: (context, state) => NoTransitionPage(
         child: HomePage(),
       ),
+      routes: [
+        GoRoute(
+          path: "add_history_page",
+          pageBuilder: (context, state) => CupertinoPage(
+            child: AddHistoryPage(),
+          ),
+        ),
+      ],
     )
   ],
 );

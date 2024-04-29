@@ -3,9 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:sang/view_model/home_page_view_model.dart';
 import 'package:sang/widget/history_card_widget.dart';
 import 'package:sang/widget/title_card_widget.dart';
-
-import '../entity/plan_data_entity.dart';
-import '../entity/plan_history_entity.dart';
 import 'badge_widget.dart';
 
 class AppbarWidget extends AppBar {
